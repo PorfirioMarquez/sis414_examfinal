@@ -28,7 +28,7 @@ jobs:
       - run: npm ci
 
       - name: Build
-        run: npx ng build --base-href "/${{ github.event.repository.name }}/"
+        run: npx ng build --configuration demo --base-href "/${{ github.event.repository.name }}/"
 
       # GitHub Pages responde 404 en rutas internas (ej. /home al recargar).
       # Con 404.html igual a index.html, Angular resuelve la ruta.

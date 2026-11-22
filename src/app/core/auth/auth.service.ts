@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, computed, inject, isDevMode, signal } from '@angular/core';
+import { Injectable, computed, inject, signal } from '@angular/core';
 import { Observable, of, tap } from 'rxjs';
 import { API_BASE_URL } from '@core/config/api.config';
 import { Session } from '@core/models/session.model';
@@ -19,8 +19,9 @@ export class AuthService {
   readonly isAuthenticated = computed(() => this._session() !== null);
 
   login(credentials: LoginRequest): Observable<unknown> {
-    // Solo desarrollo: permite entrar sin backend. No existe en el build de producción.
-    if (isDevMode() && credentials.username === 'admin' && credentials.password === 'admin') {
+    // Solo builds "development" y "demo": permite entrar sin backend.
+    // En producción DEMO_MODE es false y este bloque se elimina del bundle.
+    if (DEMO_MODE && credentials.username === 'admin' && credentials.password === 'admin') {
       this._session.set({
         usuario: 'admin',
         backups: 'None',
