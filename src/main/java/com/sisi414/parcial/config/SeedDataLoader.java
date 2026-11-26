@@ -38,11 +38,19 @@ public class SeedDataLoader implements ApplicationRunner {
             return;
         }
 
-        Integer filas = jdbcTemplate.queryForObject(
-                "select count(*) from mes", Integer.class);
+//        Integer filas = jdbcTemplate.queryForObject(
+//                "select count(*) from mes", Integer.class);
+//
+//        if (filas != null && filas > 0) {
+//            log.info("La base ya tiene datos; no se vuelve a cargar la semilla.");
+//            return;
+//        }
+        Integer unidades = jdbcTemplate.queryForObject(
+                "SELECT COUNT(*) FROM unidadadmin", Integer.class
+        );
 
-        if (filas != null && filas > 0) {
-            log.info("La base ya tiene datos; no se vuelve a cargar la semilla.");
+        if (unidades != null && unidades > 0) {
+            log.info("La base ya contiene unidades administrativas; se omite la semilla.");
             return;
         }
 
