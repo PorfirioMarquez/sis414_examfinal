@@ -1,0 +1,16 @@
+.gradle/
+.idea/
+.tmp/
+build/
+caches/
+daemon/
+native/
+undefined-build/
+wrapper/dists/
+data/
+node_modules/
+*.log
+*.class
+.env
+.env.*
+!.env.example
