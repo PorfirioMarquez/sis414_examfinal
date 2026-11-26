@@ -1,0 +1,17 @@
+@use '../../styles/window' as w;
+
+@include w.window-chrome;
+
+:host { font-family: Tahoma, Verdana, Arial, sans-serif; font-size: 12px; }
+
+.win-backdrop { z-index: 11; }
+.form { width: min(440px, calc(100vw - 16px)); }
+.fields { padding: 20px 22px 8px; }
+
+.row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.row span { flex: none; width: 80px; color: #004080; font-weight: bold; }
+.row input { flex: 1; min-width: 0; height: 23px; padding: 0 4px; border: 1px solid #7a7a7a; background: #fff; font: inherit; }
+.row input:disabled { background: #e4e4e4; color: #555; }
+
+.error { margin: 0 0 10px; padding: 4px 8px; border: 1px solid #b00020; background: #fde8ec; color: #8a0019; }
+.actions { display: flex; justify-content: center; gap: 18px; padding: 10px 22px 18px; }

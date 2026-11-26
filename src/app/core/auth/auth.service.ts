@@ -41,7 +41,9 @@ export class AuthService {
       ),
     );
   }
-
+setUnidad(unidad: Session['unidad']): void {
+  this._session.update((s) => (s ? { ...s, unidad } : s));
+}
   logout(): void {
     this._session.set(null);
   }

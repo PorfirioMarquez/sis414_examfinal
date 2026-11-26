@@ -1,0 +1,33 @@
+@mixin window-chrome {
+  .win-backdrop {
+    position: fixed; inset: 0; z-index: 10;
+    display: grid; place-items: center;
+    background: rgb(0 20 50 / 35%);
+    font-family: Tahoma, Verdana, Arial, sans-serif; font-size: 12px;
+  }
+  .win {
+    width: min(770px, calc(100vw - 16px));
+    max-height: calc(100dvh - 16px); overflow: auto;
+    padding: 1px; border: 1px solid; border-color: #fff #a0a0a0 #a0a0a0 #fff;
+    background: #f0f0f0; color: #000;
+  }
+  .win-title {
+    height: 21px; padding: 3px 4px 0; margin-bottom: 1px;
+    background: linear-gradient(90deg, #99b4d1, #b8d0e9); line-height: 15px;
+  }
+  .win-banner {
+    height: 60px;
+    background: linear-gradient(180deg, #5b95c4 0%, #2c6498 35%, #14436f 65%, #0d355c 100%);
+    color: #fff; font-size: 16px; font-weight: bold; line-height: 52px; text-align: center;
+  }
+  .win-btn {
+    height: 23px; min-width: 100px; padding: 2px 6px;
+    border: 1px solid; border-color: #fff #696969 #696969 #fff;
+    background: linear-gradient(180deg, #6aadc0 0, #4f93a6 25%, #2c647b 45%, #00364e 55%, #002c41 100%);
+    box-shadow: inset -1px -1px #a0a0a0;
+    color: #fff; font: inherit; line-height: 17px; white-space: nowrap; cursor: pointer;
+    &:active:not(:disabled) { border-color: #696969 #fff #fff #696969; box-shadow: inset 1px 1px #a0a0a0; }
+    &:focus-visible { outline: 1px dotted #fff; outline-offset: -4px; }
+    &:disabled { opacity: 0.5; cursor: default; }
+  }
+}

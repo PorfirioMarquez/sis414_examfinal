@@ -1,0 +1,49 @@
+<div class="win-backdrop">
+  <form
+    class="win form"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="form-title"
+    [formGroup]="form"
+    (ngSubmit)="guardar()"
+    (keydown.escape)="$event.stopPropagation(); closed.emit()"
+  >
+    <div class="win-title" id="form-title">
+      {{ editando ? 'Editar Unidad Administrativa' : 'Nueva Unidad Administrativa' }}
+    </div>
+
+    <div class="fields">
+      <label class="row">
+        <span>Unidad:</span>
+        <input #codigo type="text" formControlName="unidad" maxlength="10" autocomplete="off" />
+      </label>
+
+      <label class="row">
+        <span>Descripción:</span>
+        <input #descripcion type="text" formControlName="descripcion" maxlength="100" autocomplete="off" />
+      </label>
+
+      <label class="row">
+        <span>Ciudad:</span>
+        <input type="text" formControlName="ciudad" maxlength="50" list="ciudades" autocomplete="off" />
+        <datalist id="ciudades">
+          @for (c of ciudades; track c) {
+            <option [value]="c"></option>
+          }
+        </datalist>
+      </label>
+
+      @if (form.touched && form.invalid) {
+        <p class="error" role="alert">Complete todos los campos.</p>
+      }
+      @if (error(); as message) {
+        <p class="error" role="alert">{{ message }}</p>
+      }
+    </div>
+
+    <div class="actions">
+      <button type="submit" class="win-btn" [disabled]="saving()">Aceptar</button>
+      <button type="button" class="win-btn" (click)="closed.emit()">Cancelar</button>
+    </div>
+  </form>
+</div>

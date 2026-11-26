@@ -17,7 +17,16 @@ export const routes: Routes = [
         path: 'home',
         loadChildren: () => import('./features/home/home.routes').then((m) => m.HOME_ROUTES),
       },
+        {
+  path: 'unidad',
+  loadChildren: () => import('./features/unidad/unidad.routes').then((m) => m.UNIDAD_ROUTES),
+},
+
     ],
   },
+
   { path: '**', redirectTo: 'login' },
+
+
+
 ];

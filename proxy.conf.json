@@ -1,0 +1,8 @@
+{
+
+  "/api": {
+    "target": "https://sis414-examfinal.onrender.com",
+    "secure": true,
+    "changeOrigin": true
+  }
+}

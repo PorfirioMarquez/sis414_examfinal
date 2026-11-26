@@ -8,6 +8,7 @@ interface MenuItem {
   /** Índice de la letra subrayada (atajo). */
   mnemonic: number;
   action?: 'logout';
+  route?: string;
 }
 
 @Component({
@@ -39,7 +40,7 @@ export class Layout {
 
   protected readonly headerBackground = `url('assets/images/barravsiaf.jpg')`;
 
-  protected readonly background =`url('assets/images/themes/${
+  protected readonly background = `url('assets/images/themes/${
     Layout.THEMES[Math.floor(Math.random() * Layout.THEMES.length)]
   }')`;
 
@@ -51,7 +52,7 @@ export class Layout {
     { label: 'Administradores', mnemonic: 1 },
     { label: 'Iniciar sesión', mnemonic: 0, action: 'logout' },
     { label: 'Respaldos BD', mnemonic: 10 },
-    { label: 'Administrar Unidad', mnemonic: 1 },
+    { label: 'Administrar Unidad', mnemonic: 1, route: '/unidad' },
     { label: 'Localizacion BD', mnemonic: 0 },
   ];
 
@@ -66,6 +67,9 @@ export class Layout {
     }
     this.active.set(item.label);
     this.sidebarOpen.set(false);
+    if (item.route) {
+      this.router.navigateByUrl(item.route);
+    }
   }
 
   protected logout(): void {

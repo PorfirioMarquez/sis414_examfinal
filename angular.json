@@ -82,21 +82,25 @@
           },
           "defaultConfiguration": "production"
         },
-        "serve": {
-          "builder": "@angular/build:dev-server",
-          "configurations": {
-            "production": {
-              "buildTarget": "vSIAF_FE:build:production"
-            },
-            "development": {
-              "buildTarget": "vSIAF_FE:build:development"
-            }
-          },
-          "defaultConfiguration": "development"
-        },
-        "test": {
-          "builder": "@angular/build:unit-test"
-        }
+      "serve": {
+  "builder": "@angular/build:dev-server",
+  "options": {
+    "proxyConfig": "proxy.conf.json"
+  },
+  "configurations": {
+    "production": {
+      "buildTarget": "vSIAF_FE:build:production"
+    },
+    "development": {
+      "buildTarget": "vSIAF_FE:build:development"
+    }
+  },
+  "defaultConfiguration": "development"
+},
+"test": {
+  "builder": "@angular/build:unit-test"
+}
+
       }
     }
   }

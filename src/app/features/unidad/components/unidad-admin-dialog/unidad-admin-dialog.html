@@ -1,0 +1,76 @@
+<div class="win-backdrop">
+<div class="win" role="dialog" aria-modal="true" aria-labelledby="unidad-title">
+    <div class="win-title" id="unidad-title">Unidad Administrativa</div>
+    <div class="win-banner">ADMINISTRACION UNIDAD ADMINISTRATIVA</div>
+
+    <div class="body">
+    @if (modoDemo()) {
+        <p class="aviso">Modo demostración: sin conexión al servidor, los datos no se guardan.</p>
+    }
+    @if (error(); as message) {
+        <p class="error" role="alert">{{ message }}</p>
+    }
+
+    <div class="grid" tabindex="0" (keydown)="onKeydown($event)">
+        <table>
+        <thead>
+            <tr>
+            <th class="c-unidad">UNIDAD</th>
+            <th class="c-desc">DESCRIPCION</th>
+            <th class="c-ciudad">CIUDAD</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (u of unidades(); track u.unidad) {
+            <tr
+                [class.sel]="u.unidad === selectedId()"
+                [attr.aria-selected]="u.unidad === selectedId()"
+                (click)="selectedId.set(u.unidad)"
+                (dblclick)="seleccionar()"
+            >
+                <td>{{ u.unidad }}</td>
+                <td>{{ u.descripcion }}</td>
+                <td>{{ u.ciudad }}</td>
+            </tr>
+            }
+            @for (_ of filler(); track $index) {
+            <tr class="vacia"><td></td><td></td><td></td></tr>
+            }
+        </tbody>
+        </table>
+        @if (loading()) {
+        <div class="cargando">Cargando...</div>
+        }
+    </div>
+
+    <div class="actions">
+        <button type="button" class="win-btn" (click)="nuevo()">Nuevo</button>
+        <button type="button" class="win-btn" [disabled]="!current()" (click)="editar()">Editar</button>
+        <button type="button" class="win-btn" [disabled]="!current()" (click)="pedirEliminar()">Eliminar</button>
+        <button type="button" class="win-btn" [disabled]="!current()" (click)="seleccionar()">Seleccionar</button>
+        <button type="button" class="win-btn" (click)="closed.emit()">Salir</button>
+    </div>
+    </div>
+
+    @if (confirmar(); as u) {
+    <div class="confirm-backdrop">
+        <div class="confirm" role="alertdialog" aria-modal="true" aria-labelledby="confirm-msg">
+        <p id="confirm-msg">
+            ¿Está seguro de eliminar la unidad <strong>{{ u.unidad }}</strong> ({{ u.descripcion }})?
+        </p>
+        <div class="confirm-actions">
+            <button type="button" class="win-btn" (click)="eliminar()">Sí</button>
+            <button type="button" class="win-btn" (click)="confirmar.set(null)">No</button>
+        </div>
+        </div>
+    </div>
+    } </div>
+</div>
+
+@if (form()) {
+<app-unidad-form-dialog
+    [unidad]="formUnidad()"
+    (saved)="onGuardado($event)"
+    (closed)="form.set(null)"
+/>
+}
